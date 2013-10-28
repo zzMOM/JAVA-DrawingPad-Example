@@ -12,7 +12,8 @@ public class DrawingCanvas extends ScribbleCanvas{
 
 	public DrawingCanvas(){}
 	
-	protected EventListener makeCanvasListener(){
+	// factory method 
+	protected EventListener makeCanvaslistener(){
 		return(drawingCanvasListener = new DrawingCanvasListener(this));
 	}
 	
