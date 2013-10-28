@@ -11,15 +11,11 @@ public class DrawingCanvasListener extends ScribbleCanvasListener{
 		super(canvas, null);
 	}
 	
-	public void setTool(Tool tool){
-		drawingCanvasListener.setTool(tool);
-	}
-	
 	public Tool getTool(){
 		return tool;
 	}
 	
-	pubilc void setTool(Tool tool){
+	public void setTool(Tool tool){
 		this.tool = tool;
 	}
 }
