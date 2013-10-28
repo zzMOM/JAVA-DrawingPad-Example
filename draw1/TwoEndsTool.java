@@ -3,7 +3,7 @@ package draw1;
 import java.awt.*;
 import scribble3.*;
 
-public class TwoEndsTool extends AbstractTool{
+public class TwoEndsTool extends AbstractTool implements Tool{
 	public static final int LINE = 0;
 	public static final int OVAL = 1;
 	public static final int RECT = 2;
@@ -41,7 +41,7 @@ public class TwoEndsTool extends AbstractTool{
 			Graphics g = canvas.getGraphics();
 			g.setXORMode(Color.darkGray);
 			g.setColor(Color.lightGray);
-			switch(Shape){
+			switch(shape){
 			case LINE:
 				drawLine(g, xStart, yStart, canvas.x, canvas.y);
 				drawLine(g, xStart, yStart, p.x, p.y);
@@ -83,5 +83,33 @@ public class TwoEndsTool extends AbstractTool{
 		g.setPaintMode();
 		canvas.repaint();
 	}
+	
+	public static void drawLine(Graphics g, int x1, int y1, int x2, int y2){
+		g.drawLine(x1, y1, x2, y2);
+	}
+	
+	public static void drawRect(Graphics g, int x, int y, int w, int h) {
+	    if (w < 0) {
+	      x = x + w; 
+	      w = -w; 
+	    }
+	    if (h < 0) {
+	      y = y + h;
+	      h = -h;
+	    }
+	    g.drawRect(x, y, w, h); 
+	  }
+	  
+	public static void drawOval(Graphics g, int x, int y, int w, int h) {
+	    if (w < 0) {
+	      x = x + w; 
+	      w = -w; 
+	    }
+	    if (h < 0) {
+	      y = y + h;
+	      h = -h;
+	    }
+	    g.drawOval(x, y, w, h); 
+	} 
 
 }
