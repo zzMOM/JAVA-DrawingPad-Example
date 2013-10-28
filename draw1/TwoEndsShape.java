@@ -3,7 +3,12 @@ package draw1;
 import java.awt.*;
 import scribble3.Shape;
 
-public class TwoEndsShape extends Shape implements Cloneable{
+/*
+ * TwoEndsShape extends Shape,
+ * but it has a new abstract common method drawOutline for all classes extends TwoEndsShape
+ * and it includes several new common methods for all classes extends TwoEndsShape
+ */
+public abstract class TwoEndsShape extends Shape implements Cloneable{
 	protected int x1, x2, y1, y2;
 	abstract public void drawOutline(Graphics g, int x1, int y1, int x2, int y2);
 	
@@ -13,7 +18,7 @@ public class TwoEndsShape extends Shape implements Cloneable{
 		super(color);
 	}
 	
-	public Object clone() throws CloneNotSuppoertedException{
+	public Object clone() throws CloneNotSupportedException{
 		return super.clone();
 	}
 	
