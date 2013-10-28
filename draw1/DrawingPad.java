@@ -28,7 +28,7 @@ public class DrawingPad extends Scribble{
 		JComponent toolbar = createToolBar(toolListener);
 		getContentPane().add(toolbar, BorderLayout.WEST);
 		JMenu menu = createToolMenu(toolListener);
-		JMenuBar menuBar = new JMenuBar();
+		//menuBar is the attribute from Scribble.java
 		menuBar.add(menu, 1);//insert at index position 1;
 	}
 	
@@ -48,7 +48,7 @@ public class DrawingPad extends Scribble{
 		toolkit.addTool(new TwoEndsTool(canvas, "Oval", TwoEndsTool.OVAL));
 		toolkit.addTool(new TwoEndsTool(canvas, "Rectangle", TwoEndsTool.RECT));
 		Tool temptool = toolkit.getTool(0);
-		drawingCanvas.setTool(temptool);
+		//drawingCanvas.setTool(temptool);
 	}
 	
 	/*
@@ -59,7 +59,7 @@ public class DrawingPad extends Scribble{
 	 */
 	//factory method
 	protected DrawingCanvas makeCanvas(){
-		return (drawingCanvas = new DrawingCanvas());
+		return new DrawingCanvas();
 	}
 	
 	//create tool bar button according to the number of tools.
