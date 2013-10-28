@@ -47,8 +47,7 @@ public class DrawingPad extends Scribble{
 		toolkit.addTool(new TwoEndsTool(canvas, "Line", TwoEndsTool.LINE));
 		toolkit.addTool(new TwoEndsTool(canvas, "Oval", TwoEndsTool.OVAL));
 		toolkit.addTool(new TwoEndsTool(canvas, "Rectangle", TwoEndsTool.RECT));
-		Tool temptool = toolkit.getTool(0);
-		//drawingCanvas.setTool(temptool);
+		drawingCanvas.setTool(toolkit.getTool(0));
 	}
 	
 	/*
@@ -58,8 +57,11 @@ public class DrawingPad extends Scribble{
 	 * 
 	 */
 	//factory method
-	protected DrawingCanvas makeCanvas(){
-		return new DrawingCanvas();
+	/*return ScribbleCanvas, because DrawingCanvas extends ScribbleCanvas, 
+	 *and DrawingCanvas doesn't define any attributes, they are all extend from ScribbleCanvas
+	 */
+	protected ScribbleCanvas makeCanvas(){
+		return (drawingCanvas = new DrawingCanvas());
 	}
 	
 	//create tool bar button according to the number of tools.
