@@ -6,6 +6,7 @@ import java.util.EventListener;
 import draw1.*;
 
 public class KeyboardDrawingCanvas extends DrawingCanvas { 
+	//set default font attributes
 	protected String fontFamily = "Serif";
 	protected int fontSize = 24; 
 	protected int fontStyle = Font.PLAIN;
@@ -60,7 +61,7 @@ public class KeyboardDrawingCanvas extends DrawingCanvas {
 	}
 
 	// factory method 
-	protected EventListener makeCanvasListener() {
+	protected EventListener makeCanvaslistener() {
 		return (drawingCanvasListener = new KeyboardDrawingCanvasListener(this)); 
 	}
 }
