@@ -1,17 +1,24 @@
 package draw4;
 
+import java.io.File;
 import java.net.URL;
+import java.util.EventListener;
 
 public class ImageDrawingCanvas extends draw3.KeyboardDrawingCanvas{
 	protected ImageDrawingCanvasListener imageDrawingCanvasListener;
+	protected File imageSrc;
 	
 	public ImageDrawingCanvas(){}
 	
-	public void setURL(URL imageSrc){
-		imageDrawingCanvasListener.setURL(imageSrc);
+	protected EventListener makeCanvaslistener(){
+		return(drawingCanvasListener = new ImageDrawingCanvasListener(this));
 	}
 	
-	public URL getURL(){
-		return imageDrawingCanvasListener.getURL();
+	public void setURL(File imageSrc){
+		this.imageSrc = imageSrc;
+	}
+	
+	public File getURL(){
+		return imageSrc;
 	}
 }
