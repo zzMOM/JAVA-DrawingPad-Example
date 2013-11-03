@@ -2,18 +2,18 @@ package draw4;
 
 import java.awt.Graphics;
 import java.awt.Point;
+import java.io.File;
 import java.net.URL;
 
 import scribble3.*;
 
 
-public class ImageTool extends AbstractTool{
+public class ImageTool extends AbstractTool implements Tool{
 	protected ImageShape image;
-	protected URL imageSrc;
+	protected File imageSrc;
 	
-	public ImageTool(ScribbleCanvas canvas, String name, URL imageSrc){
+	public ImageTool(ScribbleCanvas canvas, String name){
 		super(canvas, name);
-		this.imageSrc = imageSrc;
 	}
 	
 	public void startShape(Point p){
