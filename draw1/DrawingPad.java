@@ -4,6 +4,7 @@ import java.awt.event.*;
 import java.io.*;
 import java.awt.*;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 
 import scribble3.*;
@@ -11,20 +12,11 @@ import scribble3.*;
 public class DrawingPad extends Scribble{
 	protected ToolKIT toolkit;
 	protected DrawingCanvas drawingCanvas;
+	//protected ActionListener toolListener;
 	
 	public DrawingPad(String title){
 		super(title);
 		initTools();
-		ActionListener toolListener = new ActionListener(){
-			public void actionPerformed(ActionEvent event){
-				Object source = event.getSource();
-				if(source instanceof AbstractButton){
-					AbstractButton button = (AbstractButton) source;
-					Tool tool = toolkit.setSelectedTool(button.getText());
-					drawingCanvas.setTool(tool);
-				}
-			}
-		};
 		JComponent toolbar = createToolBar(toolListener);
 		getContentPane().add(toolbar, BorderLayout.WEST);
 		JMenu menu = createToolMenu(toolListener);
@@ -72,12 +64,32 @@ public class DrawingPad extends Scribble{
 			Tool tool = toolkit.getTool(i);
 			if(tool != null){
 				JButton button = new JButton(tool.getName());
+				/*JButton button = new JButton();
+				try {
+					String name = tool.getName();
+					name = "src/img/" + name + ".ico";
+					File fileName = new File(name);
+				    Image img = ImageIO.read(fileName);
+				    button.setIcon(new ImageIcon(img));
+				    button.setName(tool.getName());
+				  } catch (IOException ex) {}*/
 				button.addActionListener(toolListener);
 				toolbar.add(button);
 			}
 		}
 		return toolbar;
 	}
+	
+	ActionListener toolListener = new ActionListener(){
+		public void actionPerformed(ActionEvent event){
+			Object source = event.getSource();
+			if(source instanceof AbstractButton){
+				AbstractButton button = (AbstractButton) source;
+				Tool tool = toolkit.setSelectedTool(button.getText());
+				drawingCanvas.setTool(tool);
+			}
+		}
+	};
 	
 	protected JMenu createToolMenu(ActionListener toolListener){
 		JMenu menu = new JMenu("Tools");
