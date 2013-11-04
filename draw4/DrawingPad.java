@@ -50,7 +50,7 @@ public class DrawingPad extends draw3.DrawingPad{
 		toolkit.addTool(new ImageTool(canvas, "Image", imageSrc));
 	}
 	
-	protected JComponent createToolBar(ActionListener toolListener){
+    /*protected JComponent createToolBar(ActionListener toolListener){
 		JPanel toolbar = new JPanel(new GridLayout(0, 1));
 		int n = toolkit.getToolCount();
 		for(int i = 0; i < n; i++){
@@ -81,7 +81,7 @@ public class DrawingPad extends draw3.DrawingPad{
 				drawingCanvas.setTool(tool);
 			}
 		}
-	};
+		};*/
 	
 	protected void imageOptions(JMenu optionMenu){
 		String[] imageNames ={"Sun", "Moon", "Star"};
