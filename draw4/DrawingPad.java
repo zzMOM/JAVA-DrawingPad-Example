@@ -27,16 +27,6 @@ public class DrawingPad extends draw3.DrawingPad{
 		super(title);
 		JMenu menu = menuBar.getMenu(1);
 		imageOptions(menu);
-		ActionListener toolListener = new ActionListener(){
-			public void actionPerformed(ActionEvent event){
-				Object source = event.getSource();
-				if(source instanceof AbstractButton){
-					AbstractButton button = (AbstractButton) source;
-					Tool tool = toolkit.setSelectedTool(button.getName());
-					drawingCanvas.setTool(tool);
-				}
-			}
-		};
 	}
 	
 	//factory method
@@ -50,7 +40,7 @@ public class DrawingPad extends draw3.DrawingPad{
 		toolkit.addTool(new ImageTool(canvas, "Image", imageSrc));
 	}
 	
-    /*protected JComponent createToolBar(ActionListener toolListener){
+	protected JComponent createToolBar(ActionListener toolListener){
 		JPanel toolbar = new JPanel(new GridLayout(0, 1));
 		int n = toolkit.getToolCount();
 		for(int i = 0; i < n; i++){
@@ -65,14 +55,15 @@ public class DrawingPad extends draw3.DrawingPad{
 				    button.setIcon(new ImageIcon(img));
 				    button.setName(tool.getName());
 				  } catch (IOException ex) {}
-				button.addActionListener(toolListener);
+				button.addActionListener(new toolListener());
 				toolbar.add(button);
 			}
 		}
 		return toolbar;
 	}
 	
-	ActionListener toolListener = new ActionListener(){
+	//ActionListener toolListener = new ActionListener(){
+	class toolListener implements ActionListener{
 		public void actionPerformed(ActionEvent event){
 			Object source = event.getSource();
 			if(source instanceof AbstractButton){
@@ -81,7 +72,7 @@ public class DrawingPad extends draw3.DrawingPad{
 				drawingCanvas.setTool(tool);
 			}
 		}
-		};*/
+	};
 	
 	protected void imageOptions(JMenu optionMenu){
 		String[] imageNames ={"Sun", "Moon", "Star"};
