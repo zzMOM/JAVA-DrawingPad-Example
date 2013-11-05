@@ -11,18 +11,17 @@ import scribble3.*;
 
 public class ImageTool extends AbstractTool implements Tool{
 	protected ImageShape image;
-	protected String imageName;
+	//protected String imageName;
 	
-	public ImageTool(ScribbleCanvas canvas, String name, String imageName){
+	public ImageTool(ScribbleCanvas canvas, String name){
 		super(canvas, name);
-		this.imageName = imageName;
 	}
 	
 	@Override
 	public void startShape(Point p){
 		image = new ImageShape();
 		image.setLocation(p.x, p.y);
-		image.setName(imageName);
+		image.setName(name);
 		Graphics g = canvas.getGraphics();
 		image.draw(g);
 	}
