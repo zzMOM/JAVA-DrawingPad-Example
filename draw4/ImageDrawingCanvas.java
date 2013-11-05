@@ -1,12 +1,13 @@
 package draw4;
 
+import java.awt.Image;
 import java.io.File;
 import java.net.URL;
 import java.util.EventListener;
 
 public class ImageDrawingCanvas extends draw3.KeyboardDrawingCanvas{
 	protected ImageDrawingCanvasListener imageDrawingCanvasListener;
-	protected File imageSrc;
+	protected Image imageOriginal;
 	
 	public ImageDrawingCanvas(){}
 	
@@ -14,11 +15,11 @@ public class ImageDrawingCanvas extends draw3.KeyboardDrawingCanvas{
 		return(drawingCanvasListener = new ImageDrawingCanvasListener(this));
 	}
 	
-	public void setURL(File imageSrc){
-		this.imageSrc = imageSrc;
+	public void setImage(Image imageOriginal){
+		this.imageOriginal = imageOriginal;
 	}
 	
-	public File getURL(){
-		return imageSrc;
+	public Image getImage(){
+		return imageOriginal;
 	}
 }
