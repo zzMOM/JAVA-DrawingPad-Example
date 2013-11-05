@@ -2,6 +2,7 @@ package draw4;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 
@@ -9,7 +10,7 @@ import javax.imageio.ImageIO;
 
 public class ImageShape extends scribble3.Shape{
 	protected int x, y;
-	protected URL imageSrc;
+	protected String imageName;
 	
 	public ImageShape(){}
 	
@@ -18,8 +19,8 @@ public class ImageShape extends scribble3.Shape{
 		this.y = y;
 	}
 	
-	public void setURL(URL imageSrc){
-		this.imageSrc = imageSrc;
+	public void setName(String imageName){
+		this.imageName = imageName;
 	}
 	
 	public int getX(){
@@ -30,23 +31,19 @@ public class ImageShape extends scribble3.Shape{
 		return y;
 	}
 	
-	public URL getURL(){
-		return imageSrc;
+	public String getName(){
+		return imageName;
 	}
 	
 	public void draw(Graphics g){
-		BufferedImage bi;
+		File imgfile = new File("src/img/" + imageName + ".jpg");
+		Image imageOriginal = null;
 		try {
-            BufferedImage img = ImageIO.read(imageSrc);
-            int w = img.getWidth(null);
-            int h = img.getHeight(null);
-            bi = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
-            g = bi.getGraphics();
-            g.drawImage(img, x, y, null);
-
-        } catch (IOException e) {
-            System.out.println("Image could not be read");
-//            System.exit(1);
-        }
+			imageOriginal = ImageIO.read(imgfile);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        g.drawImage(imageOriginal, x, y, null);
 	}
 }
