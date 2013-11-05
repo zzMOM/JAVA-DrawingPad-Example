@@ -24,6 +24,8 @@ public class ImageTool extends AbstractTool implements Tool{
 		image.setName(name);
 		Graphics g = canvas.getGraphics();
 		image.draw(g);
+		//store the shape in the canvas
+		canvas.addShape(image);
 	}
 	
 	public void addPointToShape(Point p){}
