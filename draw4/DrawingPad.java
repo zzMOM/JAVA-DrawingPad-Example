@@ -1,15 +1,9 @@
 package draw4;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.GridLayout;
-import java.awt.Image;
-import java.awt.Toolkit;
+import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -22,13 +16,10 @@ import scribble3.Tool;
 
 
 public class DrawingPad extends draw3.DrawingPad{
-	protected ImageDrawingCanvas imageDrawingCanvas;
-	protected ActionListener toolListener;
+	//protected ImageDrawingCanvas imageDrawingCanvas;
 	
 	public DrawingPad(String title){
 		super(title);
-		//JMenu menu = menuBar.getMenu(1);
-		//imageOptions(menu);
 		
 		//create a new tool bar to show different image buttons
 		JToolBar imageToolBar = new JToolBar("Images", JToolBar.VERTICAL);
@@ -38,9 +29,9 @@ public class DrawingPad extends draw3.DrawingPad{
 	}
 	
 	//factory method
-	protected ScribbleCanvas makeCanvas(){
-		return (drawingCanvas = keyboardDrawingCanvas = imageDrawingCanvas = new ImageDrawingCanvas());
-	}
+	//protected ScribbleCanvas makeCanvas(){
+	//	return (drawingCanvas = keyboardDrawingCanvas = imageDrawingCanvas = new ImageDrawingCanvas());
+	//}
 	
 	protected void initTools(){
 		super.initTools();
@@ -83,34 +74,12 @@ public class DrawingPad extends draw3.DrawingPad{
 			if(source instanceof AbstractButton){
 				AbstractButton button = (AbstractButton) source;
 				Tool tool = toolkit.setSelectedTool(button.getToolTipText());
-				imageDrawingCanvas.setTool(tool);
+				keyboardDrawingCanvas.setTool(tool);
 			}
 		}
 	};
 	
-	/*protected void imageOptions(JMenu optionMenu){
-		String[] imageNames ={"Sun", "Moon", "Star"};
-		ActionListener imageAction = new ActionListener(){
-			public void actionPerformed(ActionEvent event){
-				Object source = event.getSource();
-				if(source instanceof JCheckBoxMenuItem){
-					JCheckBoxMenuItem mi = (JCheckBoxMenuItem) source;
-					Tool tool = toolkit.setSelectedTool(mi.getText());
-					imageDrawingCanvas.setTool(tool);
-				}
-			}
-		};
-		//add image to menu
-		JMenu imageMenu = new JMenu("Image");
-		ButtonGroup group = new ButtonGroup();
-		for(int i = 0; i < imageNames.length; i++){
-			JCheckBoxMenuItem mi = new JCheckBoxMenuItem(imageNames[i]);
-			imageMenu.add(mi);
-			mi.addActionListener(imageAction);
-			group.add(mi);
-		}
-		optionMenu.add(imageMenu);
-	}*/
+	
 	
 	/*
 	 * create a float toolbar to show image button
@@ -149,12 +118,11 @@ public class DrawingPad extends draw3.DrawingPad{
         }  
 		return button;
 	}
-	
-	
+
 	
 	public static void main(String[] args) {
-		int width = 600;
-		int height = 400;
+		int width = 1200;
+		int height = 600;
 	    JFrame frame = new DrawingPad("Drawing Pad");
 	    frame.setSize(width, height);
 	    Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
