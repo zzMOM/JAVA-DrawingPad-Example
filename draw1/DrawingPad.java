@@ -12,7 +12,7 @@ import scribble3.*;
 public class DrawingPad extends Scribble{
 	protected ToolKIT toolkit;
 	protected DrawingCanvas drawingCanvas;
-	//protected ActionListener toolListener;
+	protected ActionListener toolListener;
 	
 	public DrawingPad(String title){
 		super(title);
@@ -64,23 +64,15 @@ public class DrawingPad extends Scribble{
 			Tool tool = toolkit.getTool(i);
 			if(tool != null){
 				JButton button = new JButton(tool.getName());
-				/*JButton button = new JButton();
-				try {
-					String name = tool.getName();
-					name = "src/img/" + name + ".ico";
-					File fileName = new File(name);
-				    Image img = ImageIO.read(fileName);
-				    button.setIcon(new ImageIcon(img));
-				    button.setName(tool.getName());
-				  } catch (IOException ex) {}*/
-				button.addActionListener(toolListener);
+				button.addActionListener(new toolListener());
 				toolbar.add(button);
 			}
 		}
 		return toolbar;
 	}
 	
-	ActionListener toolListener = new ActionListener(){
+	//ActionListener toolListener = new ActionListener(){
+	class toolListener implements ActionListener{
 		public void actionPerformed(ActionEvent event){
 			Object source = event.getSource();
 			if(source instanceof AbstractButton){
@@ -98,7 +90,7 @@ public class DrawingPad extends Scribble{
 			Tool tool = toolkit.getTool(i);
 			if(tool != null){
 				JMenuItem menuitem =  new JMenuItem(tool.getName());
-				menuitem.addActionListener(toolListener);
+				menuitem.addActionListener(new toolListener());
 				menu.add(menuitem);
 			}
 		}
