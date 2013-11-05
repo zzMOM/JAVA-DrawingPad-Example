@@ -1,5 +1,6 @@
 package draw4;
 
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Image;
@@ -22,30 +23,40 @@ import scribble3.Tool;
 
 public class DrawingPad extends draw3.DrawingPad{
 	protected ImageDrawingCanvas imageDrawingCanvas;
+	protected ActionListener ImageButtonListener;
 	
 	public DrawingPad(String title){
 		super(title);
 		JMenu menu = menuBar.getMenu(1);
 		imageOptions(menu);
+		
+		//create a new tool bar to show different image buttons
+		JToolBar imageToolBar = new JToolBar("Images");
+		addImageButtons(imageToolBar);
+		//lay out the tool bar in the main panel
+		getContentPane().add(imageToolBar, BorderLayout.EAST);
 	}
 	
 	//factory method
 	protected ScribbleCanvas makeCanvas(){
-		return (drawingCanvas = imageDrawingCanvas = new ImageDrawingCanvas());
+		return (drawingCanvas = keyboardDrawingCanvas = imageDrawingCanvas = new ImageDrawingCanvas());
 	}
 	
 	protected void initTools(){
 		super.initTools();
-        File imageSrc = new File("src/draw4/sun.jpg");
-		toolkit.addTool(new ImageTool(canvas, "Image", imageSrc));
+		toolkit.addTool(new ImageTool(canvas, "Image", "sun"));
+		toolkit.addTool(new ImageTool(canvas, "Image", "moon"));
+		toolkit.addTool(new ImageTool(canvas, "Image", "star"));
 	}
 	
+	/*change button text to icon*/
 	protected JComponent createToolBar(ActionListener toolListener){
 		JPanel toolbar = new JPanel(new GridLayout(0, 1));
 		int n = toolkit.getToolCount();
 		for(int i = 0; i < n; i++){
 			Tool tool = toolkit.getTool(i);
-			if(tool != null){
+			//we create Image tool bar on the left side separately
+			if(tool != null && !tool.getName().equals("Image")){
 				JButton button = new JButton();
 				try {
 					String name = tool.getName();
@@ -53,7 +64,7 @@ public class DrawingPad extends draw3.DrawingPad{
 					File fileName = new File(name);
 				    Image img = ImageIO.read(fileName);
 				    button.setIcon(new ImageIcon(img));
-				    button.setName(tool.getName());
+				    button.setToolTipText(tool.getName());
 				  } catch (IOException ex) {}
 				button.addActionListener(new toolListener());
 				toolbar.add(button);
@@ -62,14 +73,13 @@ public class DrawingPad extends draw3.DrawingPad{
 		return toolbar;
 	}
 	
-	//ActionListener toolListener = new ActionListener(){
 	class toolListener implements ActionListener{
 		public void actionPerformed(ActionEvent event){
 			Object source = event.getSource();
 			if(source instanceof AbstractButton){
 				AbstractButton button = (AbstractButton) source;
-				Tool tool = toolkit.setSelectedTool(button.getName());
-				drawingCanvas.setTool(tool);
+				Tool tool = toolkit.setSelectedTool(button.getToolTipText());
+				imageDrawingCanvas.setTool(tool);
 			}
 		}
 	};
@@ -81,19 +91,12 @@ public class DrawingPad extends draw3.DrawingPad{
 				Object source = event.getSource();
 				if(source instanceof JCheckBoxMenuItem){
 					JCheckBoxMenuItem mi = (JCheckBoxMenuItem) source;
-					String name = mi.getText();
-					name = "src/draw4/" + name.toLowerCase() + ".jpg";
-					File imageSrc = null;
-			        //try {
-						imageSrc = new File(name);
-					//} catch (MalformedURLException e) {
-					//	e.printStackTrace();
-					//}
-					imageDrawingCanvas.setURL(imageSrc);
+					Tool tool = toolkit.setSelectedTool(mi.getText());
+					imageDrawingCanvas.setTool(tool);
 				}
 			}
 		};
-		//add font family to menu
+		//add image to menu
 		JMenu imageMenu = new JMenu("Image");
 		ButtonGroup group = new ButtonGroup();
 		for(int i = 0; i < imageNames.length; i++){
@@ -104,6 +107,46 @@ public class DrawingPad extends draw3.DrawingPad{
 		}
 		optionMenu.add(imageMenu);
 	}
+	
+	/*
+	 * create a float toolbar to show image button
+	 */
+	protected void addImageButtons(JToolBar imageToolBar){
+		JButton button = null;
+		button = makeImageButton("sun");
+		imageToolBar.add(button);
+		
+		button = makeImageButton("moon");
+		imageToolBar.add(button);
+		
+		button = makeImageButton("star");
+		imageToolBar.add(button);
+		
+	}
+	
+	protected JButton makeImageButton(String imageName){
+		//image location
+		String imgLoc = "src/img/" + imageName + ".jpg";
+		File imageFile = new File(imgLoc);
+		
+		//create and initialize the button
+		JButton button = new JButton();
+		button.addActionListener(new toolListener());
+		button.setToolTipText(imageName);
+		Image image = null;
+		try {  
+            // button icon Read from a file   
+            image = ImageIO.read(imageFile); 
+            //resize the image
+            Image image2 = image.getScaledInstance(40, 40, java.awt.Image.SCALE_SMOOTH);
+            button.setIcon(new ImageIcon(image2));
+        } catch (IOException e) {  
+            System.out.println(e.getMessage());  
+        }  
+		return button;
+	}
+	
+	
 	
 	public static void main(String[] args) {
 		int width = 600;
