@@ -23,15 +23,15 @@ import scribble3.Tool;
 
 public class DrawingPad extends draw3.DrawingPad{
 	protected ImageDrawingCanvas imageDrawingCanvas;
-	protected ActionListener ImageButtonListener;
+	protected ActionListener toolListener;
 	
 	public DrawingPad(String title){
 		super(title);
-		JMenu menu = menuBar.getMenu(1);
-		imageOptions(menu);
+		//JMenu menu = menuBar.getMenu(1);
+		//imageOptions(menu);
 		
 		//create a new tool bar to show different image buttons
-		JToolBar imageToolBar = new JToolBar("Images");
+		JToolBar imageToolBar = new JToolBar("Images", JToolBar.VERTICAL);
 		addImageButtons(imageToolBar);
 		//lay out the tool bar in the main panel
 		getContentPane().add(imageToolBar, BorderLayout.EAST);
@@ -44,9 +44,11 @@ public class DrawingPad extends draw3.DrawingPad{
 	
 	protected void initTools(){
 		super.initTools();
-		toolkit.addTool(new ImageTool(canvas, "Image", "sun"));
-		toolkit.addTool(new ImageTool(canvas, "Image", "moon"));
-		toolkit.addTool(new ImageTool(canvas, "Image", "star"));
+		//insert three imageTool into toolkit
+		//imageTool will show separately, disable imageTool show in left tool bar later
+		toolkit.addTool(new ImageTool(canvas, "sun"));
+		toolkit.addTool(new ImageTool(canvas, "moon"));
+		toolkit.addTool(new ImageTool(canvas, "star"));
 	}
 	
 	/*change button text to icon*/
@@ -55,19 +57,21 @@ public class DrawingPad extends draw3.DrawingPad{
 		int n = toolkit.getToolCount();
 		for(int i = 0; i < n; i++){
 			Tool tool = toolkit.getTool(i);
-			//we create Image tool bar on the left side separately
-			if(tool != null && !tool.getName().equals("Image")){
-				JButton button = new JButton();
+			//we create Image tool bar on the right side separately
+			//disable Image tool on left tool bar
+			//image button use .jpg  as icon, and all other button use .ico as icon
+			if(tool != null ){
 				try {
 					String name = tool.getName();
 					name = "src/img/" + name + ".ico";
 					File fileName = new File(name);
 				    Image img = ImageIO.read(fileName);
+				    JButton button = new JButton();
 				    button.setIcon(new ImageIcon(img));
 				    button.setToolTipText(tool.getName());
+				    button.addActionListener(new toolListener());
+					toolbar.add(button);
 				  } catch (IOException ex) {}
-				button.addActionListener(new toolListener());
-				toolbar.add(button);
 			}
 		}
 		return toolbar;
@@ -84,7 +88,7 @@ public class DrawingPad extends draw3.DrawingPad{
 		}
 	};
 	
-	protected void imageOptions(JMenu optionMenu){
+	/*protected void imageOptions(JMenu optionMenu){
 		String[] imageNames ={"Sun", "Moon", "Star"};
 		ActionListener imageAction = new ActionListener(){
 			public void actionPerformed(ActionEvent event){
@@ -106,7 +110,7 @@ public class DrawingPad extends draw3.DrawingPad{
 			group.add(mi);
 		}
 		optionMenu.add(imageMenu);
-	}
+	}*/
 	
 	/*
 	 * create a float toolbar to show image button
