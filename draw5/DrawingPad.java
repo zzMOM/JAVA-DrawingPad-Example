@@ -15,7 +15,6 @@ import scribble3.Tool;
 
 public class DrawingPad extends draw4.DrawingPad{
 	protected MultiPointsDrawingCanvas multiPointsDrawingCanvas;
-	protected int type = 1;//default type not polygon
 
 	public DrawingPad(String title){
 		super(title);
@@ -23,7 +22,7 @@ public class DrawingPad extends draw4.DrawingPad{
 	
 	//factory method
 	protected ScribbleCanvas makeCanvas(){
-		return (drawingCanvas = keyboardDrawingCanvas  = new MultiPointsDrawingCanvas());
+		return (drawingCanvas = keyboardDrawingCanvas = new MultiPointsDrawingCanvas());
 	}
 	
 	protected void initTools(){
@@ -38,12 +37,6 @@ public class DrawingPad extends draw4.DrawingPad{
 				AbstractButton button = (AbstractButton) source;
 				Tool tool = toolkit.setSelectedTool(button.getToolTipText());
 				multiPointsDrawingCanvas.setTool(tool);
-				if(tool.getName().equals("Polygon")){
-					type = 2;
-				} else {
-					type = 1;
-				}
-				multiPointsDrawingCanvas.setType(type);
 			}
 		}
 	};
