@@ -3,26 +3,27 @@ package draw5;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
 
-import draw3.DrawingPad;
+import draw3.KeyboardDrawingCanvas;
 
 
 public class MultiPointsDrawingCanvasListener extends draw3.KeyboardDrawingCanvasListener{
-	protected PolygonTool polygonTool = (PolygonTool)tool;
 	
-	protected MultiPointsDrawingCanvasListener(MultiPointsDrawingCanvas canvas){
+	protected MultiPointsDrawingCanvasListener(KeyboardDrawingCanvas canvas){
 		super(canvas);
 	}
 	
-	
-	public void mouseClicked(MouseEvent e){
-		canvas.mouseButtonDown = false;
+	public void mouseReleased(MouseEvent e){
 		Point p = e.getPoint();
-		polygonTool.addPointToArray(p);
-		canvas.x = p.x;
-		canvas.y = p.y;
-		if(e.getClickCount() == 2){
-			polygonTool.endArray(p);
+		tool.endShape(p);
+		canvas.mouseButtonDown = false;
+		if (tool instanceof PolygonTool) {	
+			PolygonTool polygonTool = (PolygonTool) tool; 
+			polygonTool.addPointToArray(p);
+			if(e.getClickCount() == 2){
+				polygonTool.endArray(p);
+			}
 		}
+		
 	}
 	
 
