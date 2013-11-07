@@ -30,20 +30,9 @@ public class DrawingPad extends draw4.DrawingPad{
 		toolkit.addTool(new PolygonShapeTool(canvas, "Polygon"));
 	}
 	
-	class toolListener implements ActionListener{
-		public void actionPerformed(ActionEvent event){
-			Object source = event.getSource();
-			if(source instanceof AbstractButton){
-				AbstractButton button = (AbstractButton) source;
-				Tool tool = toolkit.setSelectedTool(button.getToolTipText());
-				multiPointsDrawingCanvas.setTool(tool);
-			}
-		}
-	};
-	
 	public static void main(String[] args) {
-		int width = 1200;
-		int height = 600;
+		int width = 800;
+		int height = 400;
 	    JFrame frame = new DrawingPad("Drawing Pad");
 	    frame.setSize(width, height);
 	    Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
