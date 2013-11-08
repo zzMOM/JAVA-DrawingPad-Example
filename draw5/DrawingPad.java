@@ -13,16 +13,16 @@ import scribble3.Tool;
 
 public class DrawingPad extends draw4.DrawingPad{
 	protected MultiPointsDrawingCanvas multiPointsDrawingCanvas;
-	protected ActionListener multiPointsToolListener;
+	//protected ActionListener multiPointsToolListener;
 
 	public DrawingPad(String title){
 		super(title);
 	}
 	
 	//factory method
-	/*protected ScribbleCanvas makeCanvas(){
-		return (drawingCanvas = keyboardDrawingCanvas = new MultiPointsDrawingCanvas());
-	}*/
+	protected ScribbleCanvas makeCanvas(){
+		return (drawingCanvas = keyboardDrawingCanvas = multiPointsDrawingCanvas = new MultiPointsDrawingCanvas());
+	}
 	
 	protected void initTools(){
 		super.initTools();
@@ -46,11 +46,7 @@ public class DrawingPad extends draw4.DrawingPad{
 				    JButton button = new JButton();
 				    button.setIcon(new ImageIcon(img));
 				    button.setToolTipText(tool.getName());
-				    if(tool.getTipText().equals("MultiPoints")){
-				    	button.addActionListener(new multiPointsToolListener());
-				    } else {
-				    	button.addActionListener(new toolListener());
-				    }
+				    button.addActionListener(new toolListener());
 					toolbar.add(button);
 				  } catch (IOException ex) {}
 			}
@@ -64,21 +60,11 @@ public class DrawingPad extends draw4.DrawingPad{
 			if(source instanceof AbstractButton){
 				AbstractButton button = (AbstractButton) source;
 				Tool tool = toolkit.setSelectedTool(button.getToolTipText());
-				keyboardDrawingCanvas.setTool(tool);
-			}
-		}
-	};
-	
-	class multiPointsToolListener implements ActionListener{
-		public void actionPerformed(ActionEvent event){
-			Object source = event.getSource();
-			if(source instanceof AbstractButton){
-				AbstractButton button = (AbstractButton) source;
-				Tool tool = toolkit.setSelectedTool(button.getToolTipText());
 				multiPointsDrawingCanvas.setTool(tool);
 			}
 		}
 	};
+
 	
 	public static void main(String[] args) {
 		int width = 800;
