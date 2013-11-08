@@ -16,12 +16,12 @@ public class DrawingPad extends draw1.DrawingPad{
 	
 	protected void initTools(){
 		toolkit = new ToolKIT();
-		toolkit.addTool(new ScribbleTool(canvas, "Scribble"));
-		toolkit.addTool(new TwoEndsShapeTool(canvas, "Line", new LineShape()));
-		toolkit.addTool(new TwoEndsShapeTool(canvas, "Oval", new OvalShape()));
-		toolkit.addTool(new TwoEndsShapeTool(canvas, "Rectangle", new RectangleShape()));
-		toolkit.addTool(new TwoEndsShapeTool(canvas, "Filled Oval", new FilledOvalShape()));
-		toolkit.addTool(new TwoEndsShapeTool(canvas, "Filled Rectangle", new FilledRectangleShape()));
+		toolkit.addTool(new ScribbleTool(canvas, "Scribble", "Scribble"));
+		toolkit.addTool(new TwoEndsShapeTool(canvas, "Line", "TwoEnds", new LineShape()));
+		toolkit.addTool(new TwoEndsShapeTool(canvas, "Oval", "TwoEnds", new OvalShape()));
+		toolkit.addTool(new TwoEndsShapeTool(canvas, "Rectangle", "TwoEnds", new RectangleShape()));
+		toolkit.addTool(new TwoEndsShapeTool(canvas, "Filled Oval", "TwoEnds", new FilledOvalShape()));
+		toolkit.addTool(new TwoEndsShapeTool(canvas, "Filled Rectangle", "TwoEnds", new FilledRectangleShape()));
 		drawingCanvas.setTool(toolkit.getTool(0));
 	}
 	

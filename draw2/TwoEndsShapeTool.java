@@ -8,8 +8,8 @@ public class TwoEndsShapeTool extends AbstractTool implements Tool{
 	protected int xStart, yStart;
 	protected TwoEndsShape prototype;
 	
-	public TwoEndsShapeTool(ScribbleCanvas canvas, String name, TwoEndsShape prototype){
-		super(canvas, name);
+	public TwoEndsShapeTool(ScribbleCanvas canvas, String name, String tipText, TwoEndsShape prototype){
+		super(canvas, name, tipText);
 		this.prototype = prototype;
 	}
 	
