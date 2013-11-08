@@ -15,7 +15,7 @@ public class ScribbleCanvasListener implements MouseListener, MouseMotionListene
 	
 	public ScribbleCanvasListener(ScribbleCanvas canvas){
 		this.canvas = canvas;
-		tool = new ScribbleTool(canvas, "Scribble");
+		tool = new ScribbleTool(canvas, "Scribble", "Scribble");
 	}
 	
 	public void mousePressed(MouseEvent e){

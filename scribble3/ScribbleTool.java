@@ -5,8 +5,8 @@ import java.awt.*;
 public class ScribbleTool extends AbstractTool implements Tool{
 	protected Stroke curStroke = null;
 	
-	public ScribbleTool(ScribbleCanvas canvas, String name){
-		super(canvas, name);
+	public ScribbleTool(ScribbleCanvas canvas, String name, String tipText){
+		super(canvas, name, tipText);
 	}
 	
 	public void startShape(Point p){
