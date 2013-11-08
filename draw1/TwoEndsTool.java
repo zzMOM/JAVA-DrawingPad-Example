@@ -11,8 +11,8 @@ public class TwoEndsTool extends AbstractTool implements Tool{
 	protected int shape = LINE;
 	protected int xStart, yStart;
 	
-	public TwoEndsTool(ScribbleCanvas canvas, String name, int shape){
-		super(canvas, name);
+	public TwoEndsTool(ScribbleCanvas canvas, String name, String tipText, int shape){
+		super(canvas, name, tipText);
 		this.shape = shape;
 	}
 	

@@ -35,10 +35,10 @@ public class DrawingPad extends Scribble{
 		 * and set "Scribble" as the default tool.
 		 */
 		toolkit = new ToolKIT();
-		toolkit.addTool(new ScribbleTool(canvas, "Scribble"));
-		toolkit.addTool(new TwoEndsTool(canvas, "Line", TwoEndsTool.LINE));
-		toolkit.addTool(new TwoEndsTool(canvas, "Oval", TwoEndsTool.OVAL));
-		toolkit.addTool(new TwoEndsTool(canvas, "Rectangle", TwoEndsTool.RECT));
+		toolkit.addTool(new ScribbleTool(canvas, "Scribble", "Scribble"));
+		toolkit.addTool(new TwoEndsTool(canvas, "Line", "TwoEnds", TwoEndsTool.LINE));
+		toolkit.addTool(new TwoEndsTool(canvas, "Oval", "TwoEnds", TwoEndsTool.OVAL));
+		toolkit.addTool(new TwoEndsTool(canvas, "Rectangle", "TwoEnds", TwoEndsTool.RECT));
 		drawingCanvas.setTool(toolkit.getTool(0));
 	}
 	
