@@ -12,8 +12,8 @@ public class PolygonShapeTool extends scribble3.AbstractTool implements PolygonT
 	protected int index = 0;
 	protected PolygonShape curPolygon = new PolygonShape();
 	
-	public PolygonShapeTool(ScribbleCanvas canvas, String name) {
-		super(canvas, name);
+	public PolygonShapeTool(ScribbleCanvas canvas, String name, String tipText) {
+		super(canvas, name, tipText);
 	}
 	
 	public void addPointToArray(Point p){
