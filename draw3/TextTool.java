@@ -7,8 +7,8 @@ public class TextTool extends AbstractTool implements KeyboardTool{
 	protected StringBuffer text;
 	protected Text curShape;
 	
-	public TextTool(ScribbleCanvas canvas, String name){
-		super(canvas, name);
+	public TextTool(ScribbleCanvas canvas, String name, String tipText){
+		super(canvas, name, tipText);
 		text = new StringBuffer();
 	}
 	

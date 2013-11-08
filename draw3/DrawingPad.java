@@ -25,7 +25,7 @@ public class DrawingPad extends draw2.DrawingPad{
 	
 	protected void initTools(){
 		super.initTools();
-		toolkit.addTool(new TextTool(canvas, "Text"));
+		toolkit.addTool(new TextTool(canvas, "Text", "Text"));
 	}
 	
 	protected void addFontOptions(JMenu optionMenu){
