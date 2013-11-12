@@ -10,7 +10,7 @@ public class PolygonShape extends MultiPointsShape{
 		g.drawPolygon(x, y, x.length);
 	}
 	
-	public void drawOutline(Graphics g, int[] x, int y[]){
-		g.drawPolygon(x, y, x.length);
+	public void drawOutline(Graphics g, int x1, int y1, int x2, int y2){
+		g.drawLine(x1, y1, x2, y2);
 	}
 }
