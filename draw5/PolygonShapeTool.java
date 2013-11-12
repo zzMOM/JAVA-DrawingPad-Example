@@ -46,7 +46,19 @@ public class PolygonShapeTool extends scribble3.AbstractTool implements PolygonT
 		}
 		curPolygon.setX(x);
 		curPolygon.setY(y);
-		canvas.addShape(curPolygon);
+		try {
+			PolygonShape newShape = (PolygonShape) curPolygon.clone();
+			newShape.setX(x);
+			newShape.setY(y);
+			newShape.setColor(canvas.getCurColor());
+			canvas.addShape(newShape);
+		} catch (CloneNotSupportedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		//reset the arraylist
+	    xy.clear();
+	    index = 0;
 	    g.setPaintMode();
 	    canvas.repaint();
 	}
