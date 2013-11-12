@@ -47,19 +47,17 @@ public class MultiPointsShapeTool extends scribble3.AbstractTool implements Poly
 			y[i] = xy.get(i).y;
 		}
 		try {
-			PolygonShape newShape = (PolygonShape) prototype.clone();
+			MultiPointsShape newShape = (MultiPointsShape) prototype.clone();
 			newShape.setX(x);
 			newShape.setY(y);
 			newShape.setColor(canvas.getCurColor());
 			canvas.addShape(newShape);
 		} catch (CloneNotSupportedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		//reset the arraylist
 	    xy.clear();
 	    index = 0;
-		canvas.addShape(prototype);
 	    g.setPaintMode();
 	    canvas.repaint();
 	}
