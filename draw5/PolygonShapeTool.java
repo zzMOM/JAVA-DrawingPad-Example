@@ -38,6 +38,12 @@ public class PolygonShapeTool extends scribble3.AbstractTool implements PolygonT
 		g.setXORMode(Color.darkGray);
 		g.setColor(Color.lightGray);
 		curPolygon.setColor(canvas.getCurColor());
+		x = new int[index - 1];
+		y = new int[index - 1]; 
+		for(int i = 0; i < index - 1; i++){
+			x[i] = xy.get(i).x;
+			y[i] = xy.get(i).y;
+		}
 		curPolygon.setX(x);
 		curPolygon.setY(y);
 		canvas.addShape(curPolygon);
