@@ -36,6 +36,7 @@ public class DrawingPad extends draw5.DrawingPad{
 		toolkit.addTool(new ImageTool(canvas, "star", "Image"));
 		toolkit.addTool(new MultiPointsShapeTool(canvas, "Polygon", "MulitPoints", new PolygonShape()));
 		toolkit.addTool(new MultiPointsShapeTool(canvas, "Filled Polygon", "MulitPoints", new FilledPolygonShape()));
+		toolkit.addTool(new MultiPointsShapeTool(canvas, "Polyline", "MulitPoints", new PolylineShape()));
 		drawingCanvas.setTool(toolkit.getTool(0));
 	}
 	
